@@ -84,6 +84,12 @@ METADATA_BASENAMES = (
     'icon.png',
     'fanart.jpg',
     'LICENSE.txt')
+BUILD_VERSIONS = {
+    'Matrix':
+        {'python-api': '3.0.0'},
+    'Leia':
+        {'python-api': None} #  do not alter
+}
 
 
 def get_archive_basename(addon_metadata):
@@ -188,11 +194,19 @@ def update_news(metadata_path, changelog):
         tree.write(info_file, encoding='UTF-8', xml_declaration=True)
 
 
-def update_version(metadata_path, version):
+def update_version(metadata_path, version, kodi_version=None):
 
     tree = xml.etree.ElementTree.ElementTree(file=metadata_path)
     root = tree.getroot()
-    root.set('version', version.replace('-','~').replace('~', '-', 1))
+    ver = version.replace('-','~').replace('~', '-', 1)
+    if kodi_version:
+        api_ver = BUILD_VERSIONS.get(kodi_version, {}).get('python-api')
+        if api_ver:
+            for el in root.find('requires'):
+                if el.get('addon') == 'xbmc.python':
+                    el.set('version', api_ver)
+        ver += '_{vers}'.format(vers=kodi_version)
+    root.set('version', ver)
 
     with io.BytesIO() as info_file:
         tree.write(info_file, encoding='UTF-8', xml_declaration=True)
@@ -255,7 +269,7 @@ def fetch_addon_from_git(addon_location, target_folder):
         shutil.rmtree(clone_folder, ignore_errors=False)
 
 
-def fetch_addon_from_folder(raw_addon_location, target_folder):
+def fetch_addon_from_folder(raw_addon_location, target_folder, kodi_version):
     addon_location = os.path.expanduser(raw_addon_location)
     metadata_path = os.path.join(addon_location, INFO_BASENAME)
 
@@ -263,7 +277,7 @@ def fetch_addon_from_folder(raw_addon_location, target_folder):
     version = get_version(repo)
 
     # Update addon metadata
-    update_version(metadata_path, version)
+    update_version(metadata_path, version, kodi_version)
     changelog = generate_changelog(repo)
     write_changelog_file(addon_location, changelog)
     update_news(metadata_path, changelog)
@@ -348,14 +362,14 @@ def fetch_addon_from_zip(raw_addon_location, target_folder):
     return addon_metadata
 
 
-def fetch_addon(addon_location, target_folder, result_slot):
+def fetch_addon(addon_location, target_folder, result_slot, kodi_version):
     try:
         if is_url(addon_location):
             addon_metadata = fetch_addon_from_git(
                 addon_location, target_folder)
         elif os.path.isdir(addon_location):
             addon_metadata = fetch_addon_from_folder(
-                addon_location, target_folder)
+                addon_location, target_folder, kodi_version)
         elif os.path.isfile(addon_location):
             addon_metadata = fetch_addon_from_zip(
                 addon_location, target_folder)
@@ -366,23 +380,26 @@ def fetch_addon(addon_location, target_folder, result_slot):
         result_slot.append(WorkerResult(None, sys.exc_info()))
 
 
-def get_addon_worker(addon_location, target_folder):
+def get_addon_worker(addon_location, target_folder, kodi_version):
     result_slot = []
     thread = threading.Thread(target=lambda: fetch_addon(
-        addon_location, target_folder, result_slot))
+        addon_location, target_folder, result_slot, kodi_version))
     return AddonWorker(thread, result_slot)
 
 
 def create_repository(addon_locations, target_folder, info_path,
-                      checksum_path, is_compressed):
+                      checksum_path, is_compressed, buildvers):
 
     # Create the target folder.
     if not os.path.isdir(target_folder):
         os.mkdir(target_folder)
 
     # Fetch all the add-on sources in parallel.
-    workers = [get_addon_worker(addon_location, target_folder)
-               for addon_location in addon_locations]
+    workers = []
+    for kodi_version in buildvers:
+        workers.extend([get_addon_worker(addon_location, target_folder,
+                                         kodi_version)
+                   for addon_location in addon_locations])
 
     for worker in workers:
         worker.thread.start()
@@ -451,6 +468,9 @@ def main():
                              'local folder or to a zip archive or a URL for '
                              'a Git repository with the format '
                              'REPOSITORY_URL#BRANCH:PATH')
+    parser.add_argument('--buildvers', '-b', action='store', nargs='+',
+                        help='Versions of Kodi to build for e.g Leia, '
+                             'Matrix etc.')
     args = parser.parse_args()
 
     data_path = os.path.expanduser(args.datadir)
@@ -468,7 +488,7 @@ def main():
         else os.path.join(data_path, 'addons.xml.md5'))
 
     create_repository(args.addon, data_path, info_path, checksum_path,
-                      args.compressed)
+                      args.compressed, args.buildvers)
 
 
 if __name__ == "__main__":
