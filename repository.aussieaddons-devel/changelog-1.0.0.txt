@@ -1,2 +1,0 @@
-[B]Version v1.0[/B]
-- Initial release of Aussie Add-ons development repository
