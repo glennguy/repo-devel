@@ -70,8 +70,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-</addons>
-<addon id="plugin.video.sticky" name="Sticky Nnnnnn" provider-name="Sticky" version="1.0.2_Nnnnnn">
+  <addon id="plugin.video.sticky" name="Sticky Nnnnnn" provider-name="Sticky" version="1.0.2_Nnnnnn">
     <requires>
       <import addon="xbmc.python" version="4.0.0" />
     </requires>
