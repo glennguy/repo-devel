@@ -42,6 +42,20 @@
       <platform>all</platform>
     </extension>
   </addon>
+  <addon id="plugin.video.sticky" name="Sticky Matrix" provider-name="Sticky" version="1.0.2_Matrix">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
+      <provides>video</provides>
+    </extension>
+    <extension library="default.py" point="xbmc.addon.metadata">
+      <summary>Sticky Matrix 1.0.2</summary>
+      <description>Sticky Matrix 1.0.2</description>
+      <provides>video</provides>
+      <platform>all</platform>
+    </extension>
+  </addon>
   <addon id="plugin.video.sticky" name="Sticky Nnnnnn" provider-name="Sticky" version="1.0.1_Nnnnnn">
     <requires>
       <import addon="xbmc.python" version="4.0.0" />
@@ -52,6 +66,21 @@
     <extension library="default.py" point="xbmc.addon.metadata">
       <summary>Sticky Nnnnnn 1.0.1</summary>
       <description>Sticky Nnnnnn 1.0.1</description>
+      <provides>video</provides>
+      <platform>all</platform>
+    </extension>
+  </addon>
+</addons>
+<addon id="plugin.video.sticky" name="Sticky Nnnnnn" provider-name="Sticky" version="1.0.2_Nnnnnn">
+    <requires>
+      <import addon="xbmc.python" version="4.0.0" />
+    </requires>
+    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
+      <provides>video</provides>
+    </extension>
+    <extension library="default.py" point="xbmc.addon.metadata">
+      <summary>Sticky Nnnnnn 1.0.2</summary>
+      <description>Sticky Nnnnnn 1.0.2</description>
       <provides>video</provides>
       <platform>all</platform>
     </extension>
