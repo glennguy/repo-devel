@@ -1,19 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.0_Leia">
-    <requires>
-      <import addon="xbmc.python" version="2.1.0" />
-    </requires>
-    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
-      <provides>video</provides>
-    </extension>
-    <extension library="default.py" point="xbmc.addon.metadata">
-      <summary>Sticky Leia 1.0.0</summary>
-      <description>Sticky Leia 1.0.0</description>
-      <provides>video</provides>
-      <platform>all</platform>
-    </extension>
-  </addon>
   <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.1_Leia">
     <requires>
       <import addon="xbmc.python" version="2.1.0" />
@@ -24,6 +10,20 @@
     <extension library="default.py" point="xbmc.addon.metadata">
       <summary>Sticky Leia 1.0.1</summary>
       <description>Sticky Leia 1.0.1</description>
+      <provides>video</provides>
+      <platform>all</platform>
+    </extension>
+  </addon>
+  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.2_Leia">
+    <requires>
+      <import addon="xbmc.python" version="2.1.0" />
+    </requires>
+    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
+      <provides>video</provides>
+    </extension>
+    <extension library="default.py" point="xbmc.addon.metadata">
+      <summary>Sticky Leia 1.0.2</summary>
+      <description>Sticky Leia 1.0.2</description>
       <provides>video</provides>
       <platform>all</platform>
     </extension>
