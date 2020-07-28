@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-  <addon id="plugin.video.sticky" name="Sticky Matrix" provider-name="Sticky" version="1.0.1_Matrix">
+  <addon id="plugin.video.sticky" name="Sticky Matrix" provider-name="Sticky" version="1.0.1_matrix">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -14,7 +14,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="plugin.video.sticky" name="Sticky Matrix" provider-name="Sticky" version="1.0.2_Matrix">
+  <addon id="plugin.video.sticky" name="Sticky Matrix" provider-name="Sticky" version="1.0.2_matrix">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>

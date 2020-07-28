@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
-  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.1_Leia">
+  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.1_leia">
     <requires>
       <import addon="xbmc.python" version="2.1.0" />
     </requires>
@@ -14,7 +14,7 @@
       <platform>all</platform>
     </extension>
   </addon>
-  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.2_Leia">
+  <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.2_leia">
     <requires>
       <import addon="xbmc.python" version="2.1.0" />
     </requires>
