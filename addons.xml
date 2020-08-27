@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <addons>
+  <addon id="plugin.video.stickyii" name="Sticky II Matrix" provider-name="Sticky" version="1.0.1_Matrix">
+    <requires>
+      <import addon="xbmc.python" version="3.0.0" />
+    </requires>
+    <extension library="default.py" point="xbmc.python.pluginsource" provides="video">
+      <provides>video</provides>
+    </extension>
+    <extension library="default.py" point="xbmc.addon.metadata">
+      <summary>Sticky II Matrix 1.0.1</summary>
+      <description>Sticky II Matrix 1.0.1</description>
+      <provides>video</provides>
+      <platform>all</platform>
+    </extension>
+  </addon>
   <addon id="plugin.video.sticky" name="Sticky Leia" provider-name="Sticky" version="1.0.0_Leia">
     <requires>
       <import addon="xbmc.python" version="2.1.0" />
